@@ -12,6 +12,7 @@ import com.bridgelabz.employeepayrollapp.dto.ResponseDTO;
 import com.bridgelabz.employeepayrollapp.model.EmployeePayrollData;
 import com.bridgelabz.employeepayrollapp.services.IEmployeePayrollService;
 
+@Slf4j
 @RestController
 @RequestMapping("/employeepayrollservice")
 public class EmployeePayrollController {
