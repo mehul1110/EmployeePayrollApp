@@ -11,6 +11,7 @@ import com.bridgelabz.employeepayrollapp.dto.EmployeePayrollDTO;
 import com.bridgelabz.employeepayrollapp.dto.ResponseDTO;
 import com.bridgelabz.employeepayrollapp.model.EmployeePayrollData;
 import com.bridgelabz.employeepayrollapp.services.IEmployeePayrollService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -37,16 +38,19 @@ public class EmployeePayrollController {
 
     @PostMapping("/create")
     public ResponseEntity<ResponseDTO> addEmployeePayrollData(
-            @RequestBody EmployeePayrollDTO empPayrollDTO) {
+            @Valid @RequestBody EmployeePayrollDTO empPayrollDTO) {
+        log.debug("Employee Payroll Data: {}", empPayrollDTO);
         EmployeePayrollData empData = employeePayrollService.createEmployeePayrollData(empPayrollDTO);
         ResponseDTO respDTO = new ResponseDTO("Created Employee Payroll Data successfully", empData);
         return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{empId}")
     public ResponseEntity<ResponseDTO> updateEmployeePayrollData(
-            @RequestBody EmployeePayrollDTO empPayrollDTO) {
-        EmployeePayrollData empData = employeePayrollService.updateEmployeePayrollData(empPayrollDTO);
+            @PathVariable("empId") int empId,
+            @Valid @RequestBody EmployeePayrollDTO empPayrollDTO) {
+        log.debug("Employee Payroll Data: {}", empPayrollDTO);
+        EmployeePayrollData empData = employeePayrollService.updateEmployeePayrollData(empId, empPayrollDTO);
         ResponseDTO respDTO = new ResponseDTO("Updated Employee Payroll Data successfully", empData);
         return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
     }
