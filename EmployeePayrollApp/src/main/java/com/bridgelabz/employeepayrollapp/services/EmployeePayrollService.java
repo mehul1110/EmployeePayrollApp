@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeePayrollDTO;
+import com.bridgelabz.employeepayrollapp.exception.EmployeePayrollException;
 import com.bridgelabz.employeepayrollapp.model.EmployeePayrollData;
 
 @Service
@@ -23,13 +24,13 @@ public class EmployeePayrollService implements IEmployeePayrollService {
         return employeePayrollList.stream()
                 .filter(empData -> empData.getEmployeeId() == empId)
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new EmployeePayrollException(
+                        "Employee with id " + empId + " not found"));
     }
 
     @Override
     public EmployeePayrollData createEmployeePayrollData(EmployeePayrollDTO empPayrollDTO) {
-        EmployeePayrollData empData = null;
-        empData = new EmployeePayrollData(employeePayrollList.size() + 1, empPayrollDTO);
+        EmployeePayrollData empData = new EmployeePayrollData(employeePayrollList.size() + 1, empPayrollDTO);
         employeePayrollList.add(empData);
         return empData;
     }
@@ -37,10 +38,8 @@ public class EmployeePayrollService implements IEmployeePayrollService {
     @Override
     public EmployeePayrollData updateEmployeePayrollData(int empId, EmployeePayrollDTO empPayrollDTO) {
         EmployeePayrollData empData = this.getEmployeePayrollDataById(empId);
-        if (empData != null) {
-            empData.setName(empPayrollDTO.name);
-            empData.setSalary(empPayrollDTO.salary);
-        }
+        empData.setName(empPayrollDTO.name);
+        empData.setSalary(empPayrollDTO.salary);
         return empData;
     }
 

@@ -23,4 +23,10 @@ public class ExceptionHandler {
         ResponseDTO respDTO = new ResponseDTO("Validation failed", errorMessages);
         return new ResponseEntity<>(respDTO, HttpStatus.BAD_REQUEST);
     }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(EmployeePayrollException.class)
+    public ResponseEntity<ResponseDTO> handleEmployeePayrollException(EmployeePayrollException ex) {
+        ResponseDTO respDTO = new ResponseDTO(ex.getMessage(), "No Data Found");
+        return new ResponseEntity<>(respDTO, HttpStatus.NOT_FOUND);
+    }
 }
