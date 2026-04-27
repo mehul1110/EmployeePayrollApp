@@ -21,7 +21,7 @@ This repository implements a **Spring Boot** based **Employee Payroll Management
 ---
 
 ## 📚 Use Cases Implemented
-## 📚 Use Cases Implemented
+
 
 **UC1 – Setup Spring Boot Employee Payroll Project**
 Initial project bootstrap with Maven wrapper, basic `Employee` entity, and starter REST controller.
@@ -107,18 +107,3 @@ The design follows **Layered Architecture** (Controller → Service → Reposito
 
 ---
 
-## 🤝 Contributing
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/<your‑feature>`).
-3. Follow the existing coding conventions (Lombok, MapStruct, validation annotations).
-4. Write tests for new functionality.
-5. Submit a pull request.
-
----
-
-## 📄 License
-This project is licensed under the **MIT License** – see the `LICENSE` file for details.
-
----
-
-*Happy coding!*
